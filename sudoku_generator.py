@@ -1,5 +1,14 @@
 import pygame
 
+
+screenrect = Rect(0, 0, 287, 287) #SCREEN RESOLUTION WE THINK
+
+
+
+
+
+
+
 class SudokuGenerator:
     def __init__(self, removed_cells, row_length = 9):
         self.row_length = row_length
