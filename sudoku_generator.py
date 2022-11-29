@@ -1,13 +1,4 @@
-import pygame
-from pygam.locals import *
-from constants import *
-from cell import Cell
-
-
-
-HELLO
-screenrect = Rect(0, 0, 287, 287) #SCREEN RESOLUTION WE THINK
-
+from pygame.locals import *
 
 WIDTH = 600
 HEIGHT = 600
@@ -25,10 +16,8 @@ BG_COLOR = (255, 255, 245)
 LINE_COLOR = (245, 152, 66)
 CIRCLE_COLOR = (155, 155, 155)
 CROSS_COLOR = (66, 66, 66)
-
-
-
-
+def generate_sudoku(size, removed):
+    pass
 
 class SudokuGenerator:
     def __init__(self, removed_cells, row_length = 9):
@@ -47,15 +36,14 @@ class SudokuGenerator:
         self.num = num
         pass
     def valid_in_box(self, row_start, col_start, num):
-        self.num = num
         self.row_start = row_start
         self.col_start = col_start
+        self.num = num
         return
     def is_valid(self, row, col, num):
         self.row = row
         self.col = col
         self.num = num
-
     def fill_box(self, row_start, col_start):
         self.row_start = row_start
         self.col_start = col_start
@@ -69,9 +57,6 @@ class SudokuGenerator:
     def fill_values(self):
         pass
     def remove_cells(self):
-        pass
-    def generate_sudoku(size, removed):
-
         pass
 
 class Cell:
