@@ -5,7 +5,7 @@ from cell import Cell
 
 
 
-
+HELLO
 screenrect = Rect(0, 0, 287, 287) #SCREEN RESOLUTION WE THINK
 
 
