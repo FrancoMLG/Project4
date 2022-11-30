@@ -24,9 +24,15 @@ class SudokuGenerator:
         self.row_length = row_length
         self.removed_cells = removed_cells
     def get_board(self):
-        pass
+        board = [["-" for i in range(self.row_length)] for j in range(self.row_length)]
+        return board
+
     def print_board(self):
-        pass
+        board = self.get_board
+        for row in board:
+            for col in row:
+                print(col, end= '')
+            print()
     def valid_in_row(self, row, num):
         self.row = row
         self.num = num
