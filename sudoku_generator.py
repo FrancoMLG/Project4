@@ -2,6 +2,13 @@ import pygame
 pygame.init()
 WINDOW = pygame.display.set_mode((500, 500))
 pygame.display.set_caption('Sudoku')
+run = True
+while run:
+    pygame.time.delay(1000)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
+pygame.quit()
 
 def generate_sudoku(size, removed):
     pass
