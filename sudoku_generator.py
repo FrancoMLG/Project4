@@ -45,7 +45,9 @@ class SudokuGenerator:
     def valid_in_col(self, col, num):
         self.col = col
         self.num = num
-        pass
+        board = self.get_board()
+        checking_col = board[col]
+        return num not in checking_col
     def valid_in_box(self, row_start, col_start, num):
         self.row_start = row_start
         self.col_start = col_start
