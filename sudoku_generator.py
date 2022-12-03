@@ -66,9 +66,34 @@ class SudokuGenerator:
     def fill_remaining(self, row, col):
         self.row = row
         self.col = col
-        pass
+        if (col >= self.row_length and row < self.row_length - 1):
+            row += 1
+            col = 0
+        if row >= self.row_length and col >= self.row_length:
+            return True
+        if row < self.box_length:
+            if col < self.box_length:
+                col = self.box_length
+        elif row < self.row_length - self.box_length:
+            if col == int(row // self.box_length * self.box_length):
+                col += self.box_length
+        else:
+            if col == self.row_length - self.box_length:
+                row += 1
+                col = 0
+                if row >= self.row_length:
+                    return True
+
+        for num in range(1, self.row_length + 1):
+            if self.is_valid(row, col, num):
+                self.board[row][col] = num
+                if self.fill_remaining(row, col + 1):
+                    return True
+                self.board[row][col] = 0
+        return False
     def fill_values(self):
-        pass
+        self.fill_diagonal()
+        self.fill_remaining(0, self.box_length)
     def remove_cells(self):
         pass
 

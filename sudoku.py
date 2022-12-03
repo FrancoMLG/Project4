@@ -1,4 +1,4 @@
-from sudoku_generator import SudokuGenerator as SG, Cell, Board
+from sudoku_generator import SudokuGenerator, Cell, Board
 
 if __name__ == '__main__':
     pass
