@@ -13,6 +13,14 @@ while run:
         if event.type == pygame.QUIT:
             run = False
 pygame.quit()
+def generate_sudoku(size, removed):
+    pass
+    sudoku = SudokuGenerator(size, removed)
+    sudoku.fill_values()
+    board = sudoku.get_board()
+    sudoku.remove_cells()
+    board = sudoku.get_board()
+    return board
 class SudokuGenerator:
     def __init__(self, removed_cells, row_length=9):
         self.boardclass = Board(WIDTH, HEIGHT, WINDOW, removed_cells)
