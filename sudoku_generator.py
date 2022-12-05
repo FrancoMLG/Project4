@@ -7,6 +7,8 @@ dif = WIDTH / 9
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Sudoku')
 run = True
+background_img = pygame.image.load('sudoku.jpg')
+background_img = pygame.transform.scale(background_img, (500, 500))
 while run:
     pygame.time.delay(1000)
     for event in pygame.event.get():
@@ -170,6 +172,8 @@ class Cell:
         self.value = value
     def set_sketched_value(self, value):
         self.note = value
+        font = pygame.font.Font(None, 400)
+
     def draw(self):
         pass
         #pygame.font.SysFont("comicsans", 40)
