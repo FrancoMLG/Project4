@@ -26,16 +26,25 @@ def main():
         WINDOW.blit(background_img, (0, 0))
         WINDOW.blit(welcome_text, (16, 70))
         WINDOW.blit(select_text, (55, 320))
-        pygame.draw.rect(WINDOW, (255, 165, 0), pygame.Rect(25, 400, 125, 50))
+        easy_rect = pygame.draw.rect(WINDOW, (255, 165, 0), pygame.Rect(25, 400, 125, 50))
         WINDOW.blit(easy_text, (55, 410))
-        pygame.draw.rect(WINDOW, (255, 165, 0), pygame.Rect(190, 400, 125, 50))
+        medium_rect = pygame.draw.rect(WINDOW, (255, 165, 0), pygame.Rect(190, 400, 125, 50))
         WINDOW.blit(medium_text, (201, 411))
-        pygame.draw.rect(WINDOW, (255, 165, 0), pygame.Rect(350, 400, 125, 50))
+        hard_rect = pygame.draw.rect(WINDOW, (255, 165, 0), pygame.Rect(350, 400, 125, 50))
         WINDOW.blit(hard_text, (378, 411))
         pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            if event.type == pygame.MOUSEBUTTONDOWN and easy_rect.collidepoint(event.pos):
+                if pygame.mouse.get_pressed()[0] == 1:
+                    Board.draw()
+            if event.type == pygame.MOUSEBUTTONDOWN and medium_rect.collidepoint(event.pos):
+                if pygame.mouse.get_pressed()[0] == 1:
+                    print('medium click')
+            if event.type == pygame.MOUSEBUTTONDOWN and hard_rect.collidepoint(event.pos):
+                if pygame.mouse.get_pressed()[0] == 1:
+                    print('hard click')
     #pygame.quit()
 
 if __name__ == '__main__':

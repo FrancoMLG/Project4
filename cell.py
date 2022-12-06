@@ -1,5 +1,6 @@
 import pygame
 import pygame.draw
+pygame.init()
 x = 0
 y = 0
 WIDTH = 500
