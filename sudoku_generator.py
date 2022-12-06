@@ -1,61 +1,58 @@
 import pygame
+import pygame.draw
 import random
-
+x = 0
+y = 0
 pygame.init()
 WIDTH = 500
 HEIGHT = 500
-DIFFICULTY = 30 #depends on user input TEMPORARILY SET AT 30
 dif = WIDTH / 9
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Sudoku')
-run = True
+running = True
 background_img = pygame.image.load('sudoku.jpg')
 background_img = pygame.transform.scale(background_img, (500, 500))
-smallfont = pygame.font.SysFont('Corbel', 35)
-mediumfont = pygame.font.SysFont('Corbel', 50)
-largefont = pygame.font.SysFont('Corbel', 70)
+smallfont = pygame.font.SysFont('Times New Roman', 25)
+mediumfont = pygame.font.SysFont('Times New Roman', 50)
+largefont = pygame.font.SysFont('Times New Roman', 55)
 welcome_text = largefont.render('Welcome to Sudoku!', True, (0, 0, 0))
 select_text = mediumfont.render('Select Game Mode:', True, (0, 0, 0))
 easy_text = smallfont.render('EASY', True, (255, 255, 255))
 medium_text = smallfont.render('MEDIUM', True, (255, 255, 255))
 hard_text = smallfont.render('HARD', True, (255, 255, 255))
-'''
-while run:
+while running:
     WINDOW.fill((0, 0, 0))
-    pygame.time.delay(1000)
     WINDOW.blit(background_img, (0, 0))
-    WINDOW.blit(welcome_text, (17.5, 70))
-    WINDOW.blit(select_text, (85, 320))
+    WINDOW.blit(welcome_text, (16, 70))
+    WINDOW.blit(select_text, (55, 320))
     pygame.draw.rect(WINDOW, (255, 165, 0), pygame.Rect(25, 400, 125, 50))
-    WINDOW.blit(easy_text, (55, 412))
+    WINDOW.blit(easy_text, (55, 410))
     pygame.draw.rect(WINDOW, (255, 165, 0), pygame.Rect(190, 400, 125, 50))
-    WINDOW.blit(medium_text, (204, 412))
+    WINDOW.blit(medium_text, (201, 411))
     pygame.draw.rect(WINDOW, (255, 165, 0), pygame.Rect(350, 400, 125, 50))
-    WINDOW.blit(hard_text, (380, 412))
-
+    WINDOW.blit(hard_text, (378, 411))
     pygame.display.update()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            run = False
-pygame.quit()'''
-
-def generate_sudoku(removed, size = 9):
+            running = False
+#pygame.quit()
+def generate_sudoku(size, removed):
     pass
-    sudoku = SudokuGenerator(removed, size)
+    sudoku = SudokuGenerator(size, removed)
     sudoku.fill_values()
-    #board = sudoku.get_board()
+    board = sudoku.get_board()
     sudoku.remove_cells()
     board = sudoku.get_board()
     return board
 class SudokuGenerator:
     def __init__(self, removed_cells, row_length=9):
-        self.boardobject = Board(WIDTH, HEIGHT, 500, DIFFICULTY)
+        self.boardobject = Board(9, WIDTH, HEIGHT, 30)
         self.row_length = row_length
         self.removed_cells = removed_cells
         self.board = self.get_board()
         self.box_length = 3
     def get_board(self):
-        return self.boardobject.get_board_values()
+        return self.board.get_board_values()
         # board = [["-" for i in range(self.row_length)] for j in range(self.row_length)]
         # return board
     def print_board(self):
@@ -199,8 +196,10 @@ class Cell:
         font = pygame.font.Font(None, 400)
 
     def draw(self):
-        pass
-        #pygame.font.SysFont("comicsans", 40)
+        for i in range(2):
+            pygame.draw.line(WINDOW, (255, 0, 0), (x * dif - 3, (y + i) * dif), (x * dif + dif + 3, (y + i) * dif), 7)
+            pygame.draw.line(WINDOW, (255, 0, 0), ((x + i) * dif, y * dif), ((x + i) * dif, y * dif + dif), 7)
+            #pygame.font.SysFont("comicsans", 40)
         #text1 = font1.render(str(val), 1, (0, 0, 0))
         #screen.blit(text1, (x * dif + 15, y * dif + 15))
 
@@ -235,20 +234,19 @@ class Board:
     def draw(self):
         pass
         # Draw the lines
-        '''''
-        dif = 500 / 9
         for i in range(9):
             for j in range(9):
-                if grid[i][j] != 0:
-                    # Fill blue color in already numbered grid
-                    pygame.draw.rect(screen, (0, 153, 153), (i * dif, j * dif, dif + 1, dif + 1))
-
-                    # Fill grid with default numbers specified
-                    text1 = font1.render(str(grid[i][j]), 1, (0, 0, 0))
-                    screen.blit(text1, (i * dif + 15, j * dif + 15))
-        # Draw lines horizontally and verticallyto form grid
+                if self.screen[i][j] != 0:
+                    pygame.draw.rect(WINDOW, (0, 153, 153), (i * dif, j * dif, dif + 1, dif + 1))
+                    text1 = smallfont.render(str(self.screen[i][j]), 1, (0, 0, 0))
+                    WINDOW.blit(text1, (i * dif + 15, j * dif + 15))
         for i in range(10):
-        '''''
+            if i % 3 ==0:
+                thick = 7
+            else:
+                thick = 1
+            pygame.draw.line(self.screen, (0, 0, 0), (0, i * dif), (500, i * dif), thick)
+            pygame.draw.line(self.screen, (0, 0, 0), (i * dif, 0), (i * dif, 500), thick)
     def select(self, row, col):
         self.row = row
         self.col = col
@@ -308,5 +306,3 @@ class Board:
                 if cell.value != solved_cell.value:
                     return False
         return True
-
-print(generate_sudoku(1))
