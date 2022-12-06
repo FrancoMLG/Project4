@@ -19,5 +19,10 @@ while running:
             running = False
 #pygame.quit()
 
-if __name__ == '__main__':
+
+def main():
     pass
+
+
+if __name__ == '__main__':
+    main()

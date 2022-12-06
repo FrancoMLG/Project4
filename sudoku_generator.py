@@ -1,6 +1,20 @@
 import pygame
 import random
-
+pygame.init()
+WIDTH = 500
+HEIGHT = 500
+dif = WIDTH / 9
+WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption('Sudoku')
+run = True
+background_img = pygame.image.load('sudoku.jpg')
+background_img = pygame.transform.scale(background_img, (500, 500))
+while run:
+    pygame.time.delay(1000)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
+pygame.quit()
 def generate_sudoku(size, removed):
     pass
     sudoku = SudokuGenerator(size, removed)
@@ -11,7 +25,7 @@ def generate_sudoku(size, removed):
     return board
 class SudokuGenerator:
     def __init__(self, removed_cells, row_length=9):
-        #self.boardclass = Board(WIDTH, HEIGHT, WINDOW, removed_cells)
+        self.boardclass = Board(WIDTH, HEIGHT, WINDOW, removed_cells)
         self.row_length = row_length
         self.removed_cells = removed_cells
         self.board = self.get_board()
