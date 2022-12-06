@@ -1,7 +1,8 @@
 import pygame
 import pygame.draw
-from sudoku_generator import SudokuGenerator, Cell, Board
-
+from sudoku_generator import SudokuGenerator
+from cell import Cell
+from board import Board
 def main():
     pygame.init()
     WIDTH = 500
