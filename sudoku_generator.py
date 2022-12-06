@@ -21,7 +21,7 @@ easy_text = smallfont.render('EASY', True, (255, 255, 255))
 medium_text = smallfont.render('MEDIUM', True, (255, 255, 255))
 hard_text = smallfont.render('HARD', True, (255, 255, 255))
 
-'''while running:
+while running:
     WINDOW.fill((0, 0, 0))
     WINDOW.blit(background_img, (0, 0))
     WINDOW.blit(welcome_text, (16, 70))
@@ -36,7 +36,8 @@ hard_text = smallfont.render('HARD', True, (255, 255, 255))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-#pygame.quit()'''
+#pygame.quit()
+
 def generate_sudoku(removed, size = 9):
     pass
     sudoku = SudokuGenerator(removed, size)
