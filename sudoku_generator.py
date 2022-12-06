@@ -21,7 +21,7 @@ easy_text = smallfont.render('EASY', True, (255, 255, 255))
 medium_text = smallfont.render('MEDIUM', True, (255, 255, 255))
 hard_text = smallfont.render('HARD', True, (255, 255, 255))
 
-while running:
+'''while running:
     WINDOW.fill((0, 0, 0))
     WINDOW.blit(background_img, (0, 0))
     WINDOW.blit(welcome_text, (16, 70))
@@ -36,7 +36,7 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-#pygame.quit()
+#pygame.quit()'''
 def generate_sudoku(removed, size = 9):
     pass
     sudoku = SudokuGenerator(removed, size)
@@ -49,13 +49,15 @@ class SudokuGenerator:
     def __init__(self, removed_cells, row_length=9):
         self.boardobject = Board(9, WIDTH, HEIGHT, 30)
         self.row_length = row_length
-        self.removed_cells = removed_cells
-        self.board = self.get_board()
         self.box_length = 3
+        self.removed_cells = removed_cells
+        #self.board = self.get_board()
+        self.board = self.boardobject.get_board_values()
     def get_board(self):
-        return self.boardobject.get_board_values()
+        return self.board
         # board = [["-" for i in range(self.row_length)] for j in range(self.row_length)]
         # return board
+
     def print_board(self):
         board = self.get_board()
         for i in range(0, 9):
@@ -119,6 +121,7 @@ class SudokuGenerator:
         return self.valid_in_row(row, num) and \
                self.valid_in_col(col, num) and \
                self.valid_in_box(row - row % 3, col - col % 3, num)
+
     def fill_box(self, row_start, col_start):
         if not isinstance(row_start, int):
             return False
@@ -135,9 +138,12 @@ class SudokuGenerator:
                     if self.is_valid(row, col, num):
                         break
                 self.board[row][col] = num
+
     def fill_diagonal(self):
         for pos in range(0, 9, 3):
             self.fill_box(pos, pos)
+
+
     def fill_remaining(self, row, col):
         if (col >= self.row_length and row < self.row_length - 1):
             row += 1
@@ -309,3 +315,6 @@ class Board:
         return True
 
 print(generate_sudoku(30))
+
+
+
