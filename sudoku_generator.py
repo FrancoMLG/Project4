@@ -1,43 +1,5 @@
 import pygame
 import random
-
-pygame.init()
-WIDTH = 500
-HEIGHT = 500
-dif = WIDTH / 9
-WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption('Sudoku')
-run = True
-background_img = pygame.image.load('sudoku.jpg')
-background_img = pygame.transform.scale(background_img, (500, 500))
-smallfont = pygame.font.SysFont('Corbel', 35)
-mediumfont = pygame.font.SysFont('Corbel', 50)
-largefont = pygame.font.SysFont('Corbel', 70)
-welcome_text = largefont.render('Welcome to Sudoku!', True, (0, 0, 0))
-select_text = mediumfont.render('Select Game Mode:', True, (0, 0, 0))
-easy_text = smallfont.render('EASY', True, (255, 255, 255))
-medium_text = smallfont.render('MEDIUM', True, (255, 255, 255))
-hard_text = smallfont.render('HARD', True, (255, 255, 255))
-
-while run:
-    WINDOW.fill((0, 0, 0))
-    pygame.time.delay(1000)
-    WINDOW.blit(background_img, (0, 0))
-    WINDOW.blit(welcome_text, (17.5, 70))
-    WINDOW.blit(select_text, (85, 320))
-    pygame.draw.rect(WINDOW, (255, 165, 0), pygame.Rect(25, 400, 125, 50))
-    WINDOW.blit(easy_text, (55, 412))
-    pygame.draw.rect(WINDOW, (255, 165, 0), pygame.Rect(190, 400, 125, 50))
-    WINDOW.blit(medium_text, (204, 412))
-    pygame.draw.rect(WINDOW, (255, 165, 0), pygame.Rect(350, 400, 125, 50))
-    WINDOW.blit(hard_text, (380, 412))
-
-    pygame.display.update()
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = False
-pygame.quit()
-
 def generate_sudoku(size, removed):
     pass
     sudoku = SudokuGenerator(size, removed)
