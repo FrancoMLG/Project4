@@ -4,6 +4,7 @@ import random
 pygame.init()
 WIDTH = 500
 HEIGHT = 500
+DIFFICULTY = 30 #depends on user input TEMPORARILY SET AT 30
 dif = WIDTH / 9
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Sudoku')
@@ -18,7 +19,7 @@ select_text = mediumfont.render('Select Game Mode:', True, (0, 0, 0))
 easy_text = smallfont.render('EASY', True, (255, 255, 255))
 medium_text = smallfont.render('MEDIUM', True, (255, 255, 255))
 hard_text = smallfont.render('HARD', True, (255, 255, 255))
-
+'''
 while run:
     WINDOW.fill((0, 0, 0))
     pygame.time.delay(1000)
@@ -36,25 +37,25 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-pygame.quit()
+pygame.quit()'''
 
-def generate_sudoku(size, removed):
+def generate_sudoku(removed, size = 9):
     pass
-    sudoku = SudokuGenerator(size, removed)
+    sudoku = SudokuGenerator(removed, size)
     sudoku.fill_values()
-    board = sudoku.get_board()
+    #board = sudoku.get_board()
     sudoku.remove_cells()
     board = sudoku.get_board()
     return board
 class SudokuGenerator:
     def __init__(self, removed_cells, row_length=9):
-        #self.boardclass = Board(WIDTH, HEIGHT, WINDOW, removed_cells)
+        self.boardobject = Board(WIDTH, HEIGHT, 500, DIFFICULTY)
         self.row_length = row_length
         self.removed_cells = removed_cells
         self.board = self.get_board()
         self.box_length = 3
     def get_board(self):
-        return self.board.get_board_values()
+        return self.boardobject.get_board_values()
         # board = [["-" for i in range(self.row_length)] for j in range(self.row_length)]
         # return board
     def print_board(self):
@@ -307,3 +308,5 @@ class Board:
                 if cell.value != solved_cell.value:
                     return False
         return True
+
+print(generate_sudoku(1))
