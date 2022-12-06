@@ -20,6 +20,7 @@ select_text = mediumfont.render('Select Game Mode:', True, (0, 0, 0))
 easy_text = smallfont.render('EASY', True, (255, 255, 255))
 medium_text = smallfont.render('MEDIUM', True, (255, 255, 255))
 hard_text = smallfont.render('HARD', True, (255, 255, 255))
+
 while running:
     WINDOW.fill((0, 0, 0))
     WINDOW.blit(background_img, (0, 0))
@@ -36,11 +37,11 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 #pygame.quit()
-def generate_sudoku(size, removed):
+def generate_sudoku(removed, size = 9):
     pass
-    sudoku = SudokuGenerator(size, removed)
+    sudoku = SudokuGenerator(removed, size)
     sudoku.fill_values()
-    board = sudoku.get_board()
+    #board = sudoku.get_board()
     sudoku.remove_cells()
     board = sudoku.get_board()
     return board
@@ -52,7 +53,7 @@ class SudokuGenerator:
         self.board = self.get_board()
         self.box_length = 3
     def get_board(self):
-        return self.board.get_board_values()
+        return self.boardobject.get_board_values()
         # board = [["-" for i in range(self.row_length)] for j in range(self.row_length)]
         # return board
     def print_board(self):
@@ -306,3 +307,5 @@ class Board:
                 if cell.value != solved_cell.value:
                     return False
         return True
+
+print(generate_sudoku(30))
