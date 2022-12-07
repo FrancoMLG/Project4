@@ -7,7 +7,7 @@ WIDTH = 500
 HEIGHT = 550
 dif = WIDTH / 9
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
-def generate_initial_grid(reset_rect,restart_rect,exit_rect):
+def generate_initial_grid(reset_rect, restart_rect, exit_rect):
     for i in range(10):
         if i % 3 == 0:
             thick = 7
@@ -17,21 +17,33 @@ def generate_initial_grid(reset_rect,restart_rect,exit_rect):
         pygame.draw.line(WINDOW, (0, 0, 0), (i * dif, 0), (i * dif, 500), thick)
         smallfont = pygame.font.SysFont('Times New Roman', 25)
         reset_text = smallfont.render('reset', True, (255, 255, 255))
-        pygame.draw.rect(WINDOW, (0, 0, 0), reset_rect)
-        WINDOW.blit(reset_text, (100, 510))
+        pygame.draw.rect(WINDOW, (255, 165, 0), reset_rect)
+        WINDOW.blit(reset_text, (75, 510))
 
         smallfont = pygame.font.SysFont('Times New Roman', 25)
-        exit_text = smallfont.render('restart', True, (255, 255, 255))
-        pygame.draw.rect(WINDOW, (255, 0, 0), exit_rect)
-        WINDOW.blit(exit_text, (150, 505,))
+        restart_text = smallfont.render('restart', True, (255, 255, 255))
+        pygame.draw.rect(WINDOW, (255, 165, 0), restart_rect)
+        WINDOW.blit(restart_text, (220, 510))
 
         smallfont = pygame.font.SysFont('Times New Roman', 25)
-        restart_text = smallfont.render('EXIT', True, (255, 255, 255))
-        pygame.draw.rect(WINDOW, (0, 255, 0), restart_rect)
-        WINDOW.blit(restart_text, (350, 505))
+        exit_text = smallfont.render('exit', True, (255, 255, 255))
+        pygame.draw.rect(WINDOW, (255, 165, 0), exit_rect)
+        WINDOW.blit(exit_text, (380, 510))
 
 
+def restart_game():
+    pygame.init()
+    pygame.display.set_caption('Sudoku')
+    running = True
+    background_img = pygame.image.load('sudoku.jpg')
+    background_img = pygame.transform.scale(background_img, (500, 550))
 
+def game_over():
+    pygame.init()
+    pygame.display.set_caption('Sudoku')
+    running = False
+    background_img = pygame.image.load('sudoku.jpg')
+    background_img = pygame.transform.scale(background_img, (500, 550))
 
 def main():
     pygame.init()
@@ -59,7 +71,7 @@ def main():
     hard_rect = pygame.draw.rect(WINDOW, (255, 165, 0), pygame.Rect(350, 400, 125, 50))
     WINDOW.blit(hard_text, (378, 411))
 
-    reset_rect = pygame.Rect(70, 505, 100, 45)
+    reset_rect = pygame.Rect(50, 505, 100, 45)
     restart_rect = pygame.Rect(200, 505, 100, 45)
     exit_rect = pygame.Rect(350, 505, 100, 45)
 
@@ -75,30 +87,32 @@ def main():
                 if pygame.mouse.get_pressed()[0] == 1:
                     #SudokuGenerator = Board()
                     print('easy click')
-                    WINDOW.fill((255, 165, 0))
+                    WINDOW.fill((255, 255, 255))
                     generate_initial_grid(reset_rect, restart_rect, exit_rect)
                     #pygame.display.flip()
             elif event.type == pygame.MOUSEBUTTONDOWN and medium_rect.collidepoint(event.pos):
                 if pygame.mouse.get_pressed()[0] == 1:
                     print('medium click')
-                    WINDOW.fill((255, 165, 0))
+                    WINDOW.fill((255, 255, 255))
                     generate_initial_grid(reset_rect, restart_rect, exit_rect)
             elif event.type == pygame.MOUSEBUTTONDOWN and hard_rect.collidepoint(event.pos):
                 if pygame.mouse.get_pressed()[0] == 1:
                     print('hard click')
-                    WINDOW.fill((255, 165, 0))
+                    WINDOW.fill((255, 255, 255))
                     generate_initial_grid(reset_rect, restart_rect, exit_rect)
+
             elif event.type == pygame.MOUSEBUTTONDOWN and reset_rect.collidepoint(event.pos):
                 if pygame.mouse.get_pressed()[0] == 1:
                     print('reset', event.pos)
 
             elif event.type == pygame.MOUSEBUTTONDOWN and restart_rect.collidepoint(event.pos):
                 if pygame.mouse.get_pressed()[0] == 1:
-                    print('restart')
+                    print('restart', event.pos)
 
             elif event.type == pygame.MOUSEBUTTONDOWN and exit_rect.collidepoint(event.pos):
                 if pygame.mouse.get_pressed()[0] == 1:
-                    print('EXIT')
+                    print('EXIT', event.pos)
+
 
         pygame.display.update()
 
