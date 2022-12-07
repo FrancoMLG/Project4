@@ -105,6 +105,7 @@ def main():
                 if pygame.mouse.get_pressed()[0] == 1:
                     print('reset', event.pos)
 
+
             elif event.type == pygame.MOUSEBUTTONDOWN and restart_rect.collidepoint(event.pos):
                 if pygame.mouse.get_pressed()[0] == 1:
                     print('restart', event.pos)
@@ -112,6 +113,7 @@ def main():
             elif event.type == pygame.MOUSEBUTTONDOWN and exit_rect.collidepoint(event.pos):
                 if pygame.mouse.get_pressed()[0] == 1:
                     print('EXIT', event.pos)
+                    game_over()
 
 
         pygame.display.update()
