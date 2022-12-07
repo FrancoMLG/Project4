@@ -99,7 +99,6 @@ def main():
                 running = False
             elif event.type == pygame.MOUSEBUTTONDOWN and easy_rect.collidepoint(event.pos):
                 if pygame.mouse.get_pressed()[0] == 1:
-                    #SudokuGenerator = Board()
                     print('easy click')
                     WINDOW.fill((255, 255, 255))
                     generate_initial_grid(reset_rect, restart_rect, exit_rect)
@@ -138,6 +137,8 @@ def main():
                     print('QUIT', event.pos)
                     WINDOW.fill((255, 255, 255))
                     Game_Over(game_rect)
+                    running = False
+
 
 
 
