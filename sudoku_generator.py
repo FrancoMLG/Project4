@@ -1,6 +1,6 @@
 import random
+#This function
 def generate_sudoku(size, removed):
-    pass
     sudoku = SudokuGenerator(size, removed)
     sudoku.fill_values()
     sudoku.remove_cells()
