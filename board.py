@@ -1,7 +1,6 @@
 import pygame
 import pygame.draw
 from cell import Cell
-pygame.init()
 x = 0
 y = 0
 WIDTH = 500
@@ -38,6 +37,7 @@ class Board:
             values.append(col)
         return values
     def draw(self):
+        pass
         for i in range(9):
             for j in range(9):
                 if self.screen[i][j] != 0:
@@ -49,7 +49,7 @@ class Board:
                 thickness = 7
             else:
                 thickness = 1
-            pygame.draw.line(WINDOW, (0, 0, 0), (0, i * dif), (500, i * dif), thickness)
+            pygame.draw.line(self.screen, (0, 0, 0), (0, i * dif), (500, i * dif), thickness)
             pygame.draw.line(self.screen, (0, 0, 0), (i * dif, 0), (i * dif, 500), thickness)
     def select(self, row, col):
         self.row = row

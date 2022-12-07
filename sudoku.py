@@ -1,12 +1,23 @@
 import pygame
 import pygame.draw
-from sudoku_generator import SudokuGenerator
+from sudoku_generator import *
 from cell import Cell
 from board import Board
 WIDTH = 500
 HEIGHT = 550
 dif = WIDTH / 9
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
+
+def get_difficulty(event):
+    difficulty = None
+    choice = event
+    if choice == 1:
+        difficulty = 30
+    elif choice == 2:
+        difficulty = 40
+    elif choice == 3:
+        difficulty = 50
+    return difficulty
 def generate_initial_grid(reset_rect, restart_rect, exit_rect):
     for i in range(10):
         if i % 3 == 0:
@@ -85,6 +96,7 @@ def main():
                 running = False
             elif event.type == pygame.MOUSEBUTTONDOWN and easy_rect.collidepoint(event.pos):
                 if pygame.mouse.get_pressed()[0] == 1:
+                    generate_sudoku(9, get_difficulty(1))
                     #SudokuGenerator = Board()
                     print('easy click')
                     WINDOW.fill((255, 255, 255))
@@ -92,11 +104,13 @@ def main():
                     #pygame.display.flip()
             elif event.type == pygame.MOUSEBUTTONDOWN and medium_rect.collidepoint(event.pos):
                 if pygame.mouse.get_pressed()[0] == 1:
+                    generate_sudoku(9, get_difficulty(2))
                     print('medium click')
                     WINDOW.fill((255, 255, 255))
                     generate_initial_grid(reset_rect, restart_rect, exit_rect)
             elif event.type == pygame.MOUSEBUTTONDOWN and hard_rect.collidepoint(event.pos):
                 if pygame.mouse.get_pressed()[0] == 1:
+                    generate_sudoku(9, get_difficulty(3))
                     print('hard click')
                     WINDOW.fill((255, 255, 255))
                     generate_initial_grid(reset_rect, restart_rect, exit_rect)
@@ -121,3 +135,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
