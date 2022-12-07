@@ -40,30 +40,13 @@ def generate_initial_grid(reset_rect, restart_rect, exit_rect):
         pygame.draw.rect(WINDOW, (255, 165, 0), exit_rect)
         WINDOW.blit(exit_text, (380, 510))
 
-def reset_game():
-    pass
 
-def restart_game():
-    pygame.init()
-    pygame.display.set_caption('Sudoku')
-    running = True
-    background_img = pygame.image.load('sudoku.jpg')
-    background_img = pygame.transform.scale(background_img, (500, 550))
-    WINDOW.fill((0, 0, 0))
 
-def Game_Over(game_rect):
-    pygame.init()
-    pygame.display.set_caption('Sudoku')
-    running = True
-    background_img = pygame.image.load('sudoku.jpg')
-    background_img = pygame.transform.scale(background_img, (500, 550))
-    largefont = pygame.font.SysFont('Times New Roman', 55)
-    game_over_text = largefont.render('Game Over!', True, (0, 0, 0))
-    smallfont = pygame.font.SysFont('Times New Roman', 25)
-    exit_text = smallfont.render('exit', True, (255, 255, 255))
-    pygame.draw.rect(WINDOW, (255, 165, 0), game_rect)
-    WINDOW.blit(exit_text, (380, 250))
-    game_rect = pygame.Rect(350, 505, 100, 45)
+
+
+
+
+
 
 def main():
     pygame.init()
@@ -79,7 +62,8 @@ def main():
     easy_text = smallfont.render('EASY', True, (255, 255, 255))
     medium_text = smallfont.render('MEDIUM', True, (255, 255, 255))
     hard_text = smallfont.render('HARD', True, (255, 255, 255))
-    WINDOW.fill((0, 0, 0))
+    rand_txt = smallfont.render('HELLO', True, (255, 255, 255))
+    WINDOW.fill((255, 0, 0))
     WINDOW.blit(background_img, (0, 0))
     WINDOW.blit(welcome_text, (16, 70))
     WINDOW.blit(select_text, (55, 320))
@@ -89,45 +73,159 @@ def main():
     WINDOW.blit(medium_text, (201, 411))
     hard_rect = pygame.draw.rect(WINDOW, (255, 165, 0), pygame.Rect(350, 400, 125, 50))
     WINDOW.blit(hard_text, (378, 411))
+
     reset_rect = pygame.Rect(50, 505, 100, 45)
     restart_rect = pygame.Rect(200, 505, 100, 45)
     exit_rect = pygame.Rect(350, 505, 100, 45)
     game_rect = pygame.Rect(200, 200, 100, 45)
+    game_over_rect = pygame.Rect(200, 200, 100, 45)
+
+    def Game_Over(game_over_rect):
+        pygame.init()
+        pygame.display.set_caption('Sudoku')
+        running = True
+        background_img = pygame.image.load('sudoku.jpg')
+        background_img = pygame.transform.scale(background_img, (500, 550))
+        largefont = pygame.font.SysFont('Times New Roman', 60)
+        game_over_text = largefont.render('Game Over!', True, (0, 0, 0))
+        smallfont = pygame.font.SysFont('Times New Roman', 25)
+        restart_text = smallfont.render('Restart', True, (255, 255, 255))
+        WINDOW.fill((0, 0, 0))
+        WINDOW.blit(background_img, (0, 0))
+        WINDOW.blit(game_over_text, (120, 100))
+        pygame.draw.rect(WINDOW, (255, 165, 0), game_over_rect)
+        WINDOW.blit(restart_text, (215, 205))
+        game_over_rect = pygame.Rect(350, 505, 100, 45)
+
+    def Game_Won(game_rect):
+        pygame.init()
+        pygame.display.set_caption('Sudoku')
+        running = True
+        background_img = pygame.image.load('sudoku.jpg')
+        background_img = pygame.transform.scale(background_img, (500, 550))
+        largefont = pygame.font.SysFont('Times New Roman', 60)
+        game_won_text = largefont.render('Game Won!', True, (0, 0, 0))
+        smallfont = pygame.font.SysFont('Times New Roman', 25)
+        exit_text = smallfont.render('Exit', True, (255, 255, 255))
+        WINDOW.fill((0, 0, 0))
+        WINDOW.blit(background_img, (0, 0))
+        WINDOW.blit(game_won_text, (120, 100))
+        pygame.draw.rect(WINDOW, (255, 165, 0), game_rect)
+        WINDOW.blit(exit_text, (225, 210))
+        game_rect = pygame.Rect(350, 505, 100, 45)
+
+    # while running:
+    #     for event in pygame.event.get():
+    #         if event.type == pygame.QUIT:
+    #             running = False
+    title_screen = True
+    game_screen = False
+    game_fin = False
+    game_re = False
+
+
+
+    #BOARD =
+
     while running:
+        if Board.check_board == True:
+            Game_Won
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            elif event.type == pygame.MOUSEBUTTONDOWN and easy_rect.collidepoint(event.pos):
+
+            elif event.type == pygame.MOUSEBUTTONDOWN and easy_rect.collidepoint(event.pos) and title_screen:
                 if pygame.mouse.get_pressed()[0] == 1:
                     generate_sudoku(9, get_difficulty(1))
+                    print('easy click')
                     WINDOW.fill((255, 255, 255))
                     generate_initial_grid(reset_rect, restart_rect, exit_rect)
-            elif event.type == pygame.MOUSEBUTTONDOWN and medium_rect.collidepoint(event.pos):
+                    #pygame.display.flip()
+                    title_screen = False
+                    game_screen = True
+
+
+            elif event.type == pygame.MOUSEBUTTONDOWN and medium_rect.collidepoint(event.pos) and title_screen:
                 if pygame.mouse.get_pressed()[0] == 1:
                     generate_sudoku(9, get_difficulty(2))
+                    print('medium click')
                     WINDOW.fill((255, 255, 255))
                     generate_initial_grid(reset_rect, restart_rect, exit_rect)
-            elif event.type == pygame.MOUSEBUTTONDOWN and hard_rect.collidepoint(event.pos):
+                    title_screen = False
+                    game_screen = True
+
+
+
+            elif event.type == pygame.MOUSEBUTTONDOWN and hard_rect.collidepoint(event.pos) and title_screen:
                 if pygame.mouse.get_pressed()[0] == 1:
                     generate_sudoku(9, get_difficulty(3))
+                    print('hard click')
                     WINDOW.fill((255, 255, 255))
                     generate_initial_grid(reset_rect, restart_rect, exit_rect)
-            elif event.type == pygame.MOUSEBUTTONDOWN and reset_rect.collidepoint(event.pos):
+                    title_screen = False
+                    game_screen = True
+
+
+
+
+            elif event.type == pygame.MOUSEBUTTONDOWN and reset_rect.collidepoint(event.pos) and game_screen:
                 if pygame.mouse.get_pressed()[0] == 1:
+                    print('reset', event.pos)
                     WINDOW.fill((255, 255, 255))
-            elif event.type == pygame.MOUSEBUTTONDOWN and restart_rect.collidepoint(event.pos):
+                    game_screen = False
+                    #Game_Won(game_rect)
+                    #Game_Over(game_over_rect)
+
+
+
+
+            elif event.type == pygame.MOUSEBUTTONDOWN and restart_rect.collidepoint(event.pos) and game_screen:
                 if pygame.mouse.get_pressed()[0] == 1:
-                    running = False
+                    print('restart', event.pos)
+                    WINDOW.fill((255, 255, 255))
+                    game_screen = False
                     main()
-            elif event.type == pygame.MOUSEBUTTONDOWN and exit_rect.collidepoint(event.pos):
-                if pygame.mouse.get_pressed()[0] == 1:
                     running = False
+
+
+            elif event.type == pygame.MOUSEBUTTONDOWN and exit_rect.collidepoint(event.pos) and game_screen:
+                if pygame.mouse.get_pressed()[0] == 1:
+                    print('EXIT', event.pos)
+                    #WINDOW.fill((255, 255, 255))
+                    game_screen = False
+                    running = False
+
+
+
+
+
+
+            elif event.type == pygame.MOUSEBUTTONDOWN and game_over_rect.collidepoint(event.pos):
+                if pygame.mouse.get_pressed()[0] == 1:
+                    print('COMEBACK', event.pos)
+                    WINDOW.fill((255, 255, 255))
+                    main()
+                    running = False
+
             elif event.type == pygame.MOUSEBUTTONDOWN and game_rect.collidepoint(event.pos):
                 if pygame.mouse.get_pressed()[0] == 1:
+                    print('QUIT', event.pos)
                     WINDOW.fill((255, 255, 255))
-                    Game_Over(game_rect)
                     running = False
+
+
+
+
+
+
+
+
+
+
         pygame.display.update()
+
+    #pygame.quit()
+
 
 if __name__ == '__main__':
     main()
