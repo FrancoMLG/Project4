@@ -1,8 +1,8 @@
 import pygame
 import pygame.draw
 from sudoku_generator import *
-from cell import Cell
-from board import Board
+from cell import *
+from board import *
 WIDTH = 500
 HEIGHT = 550
 dif = WIDTH / 9
@@ -112,7 +112,7 @@ def main():
         WINDOW.blit(game_won_text, (120, 100))
         pygame.draw.rect(WINDOW, (255, 165, 0), game_rect)
         WINDOW.blit(exit_text, (225, 210))
-        game_rect = pygame.Rect(350, 505, 100, 45)
+
 
     # while running:
     #     for event in pygame.event.get():
@@ -120,6 +120,7 @@ def main():
     #             running = False
     title_screen = True
     game_screen = False
+    game_win = False
     game_fin = False
     game_re = False
 
@@ -128,8 +129,12 @@ def main():
     #BOARD =
 
     while running:
-        if Board.check_board == True:
-            Game_Won
+        if not Board.check_board:
+            Game_Won(game_rect)
+            game_win = True
+        '''if Board.is_full and not game_win:
+            Game_Over(game_over_rect)'''
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -173,9 +178,11 @@ def main():
                     print('reset', event.pos)
                     WINDOW.fill((255, 255, 255))
                     game_screen = False
-                    #Game_Won(game_rect)
+                    Game_Won(game_rect)
                     #Game_Over(game_over_rect)
 
+                    #playing_board = original board
+                    #display playing board
 
 
 
@@ -207,7 +214,7 @@ def main():
                     main()
                     running = False
 
-            elif event.type == pygame.MOUSEBUTTONDOWN and game_rect.collidepoint(event.pos):
+            elif event.type == pygame.MOUSEBUTTONDOWN and game_rect.collidepoint(event.pos) and game_win:
                 if pygame.mouse.get_pressed()[0] == 1:
                     print('QUIT', event.pos)
                     WINDOW.fill((255, 255, 255))

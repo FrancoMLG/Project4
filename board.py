@@ -82,7 +82,7 @@ class Board:
             row = self.cells[i]
             for j in range(0, 9):
                 cell = row[j]
-                if cell.value == None:
+                if cell.value == 0:
                     return False
         return True
     def update_board(self):
