@@ -15,6 +15,7 @@ def generate_initial_grid():
             thick = 1
         pygame.draw.line(WINDOW, (0, 0, 0), (0, i * dif), (500, i * dif), thick)
         pygame.draw.line(WINDOW, (0, 0, 0), (i * dif, 0), (i * dif, 500), thick)
+
 def main():
     pygame.init()
     pygame.display.set_caption('Sudoku')
