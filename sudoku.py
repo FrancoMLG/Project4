@@ -79,6 +79,22 @@ def main():
     exit_rect = pygame.Rect(350, 505, 100, 45)
     game_rect = pygame.Rect(200, 200, 100, 45)
     game_over_rect = pygame.Rect(200, 200, 100, 45)
+    button_rect = pygame.Rect(300, 300, 100, 45)
+
+
+
+    def button(button_rect):
+        pygame.init()
+        pygame.display.set_caption('Sudoku')
+        running = True
+        smallfont = pygame.font.sysFont('Times New Roman', 25)
+        button_text = smallfont.render('YO BOI ', True, (0, 0, 255))
+        WINDOW.fill((0, 0, 0))
+        pygame.draw.rect(WINDOW, (255, 0, 0), button_rect)
+        WINDOW.blit(button_text, (300, 300))
+
+
+
 
     def Game_Over(game_over_rect):
         pygame.init()
@@ -95,7 +111,7 @@ def main():
         WINDOW.blit(game_over_text, (120, 100))
         pygame.draw.rect(WINDOW, (255, 165, 0), game_over_rect)
         WINDOW.blit(restart_text, (215, 205))
-        game_over_rect = pygame.Rect(350, 505, 100, 45)
+
 
     def Game_Won(game_rect):
         pygame.init()
@@ -176,6 +192,19 @@ def main():
                         j_count = 0
                         # pygame.display.flip()
                         i_count = i_count + 1
+                        # for i in range(9):
+                        #     make_button(at coordinates x, y)
+                        #     x += width
+                        #     of button
+                        #     y += length
+                        #     of button
+                        #     Write
+                        #     9
+                        #     of
+                        #     these
+                        #     lines
+                        #     of
+                        #     code
                     title_screen = False
                     game_screen = True
 
@@ -207,6 +236,10 @@ def main():
                     WINDOW.fill((255, 255, 255))
                     game_screen = False
                     generate_initial_grid(reset_rect, restart_rect, exit_rect)
+
+
+
+
                     # Game_Over(game_over_rect)
                     # playing_board = original board
                     # display playing board
@@ -238,6 +271,13 @@ def main():
                     print('QUIT', event.pos)
                     WINDOW.fill((255, 255, 255))
                     running = False
+
+
+            elif event.type == pygame.MOUSEBUTTONDOWN and button_rect.collidepoint(event.pos):
+                if pygame.mouse.get_pressed()[0] == 1:
+                    print('num', event.pos)
+                    WINDOW.fill((255, 255, 255))
+
 
         pygame.display.update()
 
