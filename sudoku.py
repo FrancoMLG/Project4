@@ -157,7 +157,6 @@ def main():
                     title_screen = False
                     game_screen = True
 
-
             elif event.type == pygame.MOUSEBUTTONDOWN and medium_rect.collidepoint(event.pos) and title_screen:
                 if pygame.mouse.get_pressed()[0] == 1:
                     sudoku = generate_sudoku(9, get_difficulty(2))
@@ -179,8 +178,6 @@ def main():
                         i_count = i_count + 1
                     title_screen = False
                     game_screen = True
-
-
 
             elif event.type == pygame.MOUSEBUTTONDOWN and hard_rect.collidepoint(event.pos) and title_screen:
                 if pygame.mouse.get_pressed()[0] == 1:
@@ -204,9 +201,6 @@ def main():
                     title_screen = False
                     game_screen = True
 
-
-
-
             elif event.type == pygame.MOUSEBUTTONDOWN and reset_rect.collidepoint(event.pos) and game_screen:
                 if pygame.mouse.get_pressed()[0] == 1:
                     print('reset', event.pos)
@@ -214,11 +208,8 @@ def main():
                     game_screen = False
                     generate_initial_grid(reset_rect, restart_rect, exit_rect)
                     # Game_Over(game_over_rect)
-
                     # playing_board = original board
                     # display playing board
-
-
 
             elif event.type == pygame.MOUSEBUTTONDOWN and restart_rect.collidepoint(event.pos) and game_screen:
                 if pygame.mouse.get_pressed()[0] == 1:
@@ -235,11 +226,6 @@ def main():
                     # WINDOW.fill((255, 255, 255))
                     game_screen = False
                     running = False
-
-
-
-
-
 
             elif event.type == pygame.MOUSEBUTTONDOWN and game_over_rect.collidepoint(event.pos):
                 if pygame.mouse.get_pressed()[0] == 1:
