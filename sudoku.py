@@ -219,7 +219,6 @@ def main():
                     main()
                     running = False
 
-
             elif event.type == pygame.MOUSEBUTTONDOWN and exit_rect.collidepoint(event.pos) and game_screen:
                 if pygame.mouse.get_pressed()[0] == 1:
                     print('EXIT', event.pos)
